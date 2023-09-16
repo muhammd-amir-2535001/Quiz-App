@@ -1,0 +1,1034 @@
+const questions = [
+    {
+        que: 'Which of the following is a markup language?',
+        options: ['HTML', 'CSS', 'JavaScript', 'PHP'],
+        correctAnswer: 'HTML'
+    },
+    {
+        que: 'What year was JavaScript launched?',
+        options: ['1996', '1995', '1994', 'None of the above'],
+        correctAnswer: '1995'
+    },
+    {
+        que: 'What does CSS stand for?',
+        options: [
+            'Hypertext Markup Language',
+            'Cascading Style Sheet',
+            'JavaScript Object Notation',
+            'Helicopter Terminals Motorboats Lamborghinis'
+        ],
+        correctAnswer: 'Cascading Style Sheet'
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+const quesBox = document.getElementById('quesBox');
+const optionInputs = document.querySelectorAll('.options');
+const submitButton = document.querySelector('.btn');
+
+function loadQuestion() {
+    if (currentQuestion < questions.length) {
+        const currentQuiz = questions[currentQuestion];
+        quesBox.textContent = `${currentQuestion + 1}) ${currentQuiz.que}`;
+        for (let i = 0; i < 4; i++) {
+            optionInputs[i].value = currentQuiz.options[i];
+            optionInputs[i].nextElementSibling.textContent = `${String.fromCharCode(97 + i)}) ${currentQuiz.options[i]}`;
+        }
+    } else {
+        endQuiz();
+    }
+}
+
+function checkAnswer() {
+    for (let i = 0; i < optionInputs.length; i++) {
+        if (optionInputs[i].checked) {
+            const selectedOption = optionInputs[i].value;
+            const currentQuiz = questions[currentQuestion];
+            if (selectedOption === currentQuiz.correctAnswer) {
+                score++;
+            }
+            currentQuestion++;
+            loadQuestion();
+            break;
+        }
+    }
+}
+
+function endQuiz() {
+    document.getElementById('box').innerHTML = `
+        <div style="text-align: center;">
+            <h3>Thank you for playing the quiz!</h3>
+            <h2>Your Score: ${score} out of ${questions.length}</h2>
+        </div>`;
+}
+
+submitButton.addEventListener('click', checkAnswer);
+
+loadQuestion();
+
+
+
+
+// //  const questions = [
+// // {
+// //     'que' : 'which of the following is a markup language?',
+// //     'a' : 'HTML',
+// //     'b' : 'CSS',
+// //     'c' : 'javascript',
+// //     'd' : 'PHP',
+// //     'correcct': 'a'
+// //  },
+// //  {
+// // 'que' : "what year was javaScript lanuched?",
+// // 'a' : '1996',
+// // 'a' : '1995',
+// // 'a' : '1994',
+// // 'a' : 'none of the above',
+// // 'correct' : 'b'
+// //  },
+// //  {
+// //  'que' : "what does CSS stands for?",
+// // 'a' : 'Hypertext Markup Language',
+// // 'a' : 'Cascading style Sheet',
+// // 'a' : 'Jason Object Notation',
+// // 'a' : 'Halicopter Terainals Motorboats Lamborginis',
+// // 'correct' : 'b'
+// //  }
+// // ];
+
+// // let index = 0;
+// // let total = questions.length;
+// // let right = 0;
+// //     wrong = 0;
+// // const quesBox = document.getElementById("quesBox");
+// // const optionInputs = document.querySelectorAll(".options");
+
+
+
+// // const loadQuestion = () => {
+// //     if(index === total) {
+// //         return endQuzi()
+// //     }
+
+// //     reset();
+// // const data = questions[index]
+// // quesBox.innertext = `${index+1} ${data.que}`;
+// // optionInputs[0].nextElementSibling.innerText = data.a;
+// // optionInputs[1].nextElementSibling.innerText = data.b;
+// // optionInputs[2].nextElementSibling.innerText = data.c;
+// // optionInputs[3].nextElementSibling.innerText = data.d;
+// // }
+
+
+// // const submitQuiz = () => {
+// // const data = questions[index];
+// // const ans = getAnswer()
+// // if(ans == data.correct){
+// //  right++;
+// // }else{
+// //     wrong++;
+// // }
+// // index++;
+// // loadQuestion();
+// // return;
+// // }
+
+// // const getAnswer = () => {
+// //     let answer;
+// //     optionInputs.forEach(
+// //         (input) => {
+// //             if(input.checked){
+// //                 answer = input.value;
+// //             }
+// //         }
+// //     )
+// //     return answer;
+// // }
+
+
+// // const reset = () => {
+// //     optionInputs.forEach(
+// //         (input) => {
+// //            input.checked = false; 
+// //         }
+// //     )
+
+// // }
+
+
+// // const endQuzi = () => {
+// // document.getElementById("box").innerHTML = `
+// // <div style="text-align:center>
+// // <h3> thanks you for playing the quiz </h3>
+// // <h2> ${right} / ${ total} are correct </h3>
+// // </div>`
+// // }
+
+
+// // loadQuestion();
+
+
+// // const questions = [
+// //     {
+// //         que: 'Which of the following is a markup language?',
+// //         a: 'HTML',
+// //         b: 'CSS',
+// //         c: 'JavaScript',
+// //         d: 'PHP',
+// //         correct: 'a'
+// //     },
+// //     {
+// //         que: "What year was JavaScript launched?",
+// //         a: '1996',
+// //         b: '1995',
+// //         c: '1994',
+// //         d: 'None of the above',
+// //         correct: 'b'
+// //     },
+// //     {
+// //         que: "What does CSS stand for?",
+// //         a: 'Hypertext Markup Language',
+// //         b: 'Cascading Style Sheet',
+// //         c: 'JSON (JavaScript Object Notation)',
+// //         d: 'Helicopter Terminals Motorboats Lamborghinis',
+// //         correct: 'b'
+// //     }
+// // ];
+
+// // let index = 0;
+// // let total = questions.length;
+// // let right = 0;
+// // let wrong = 0;
+// // const quesBox = document.getElementById("quesBox");
+// // const optionInputs = document.querySelectorAll(".options");
+
+// // const loadQuestion = () => {
+// //     if (index === total) {
+// //         return endQuiz();
+// //     }
+
+// //     reset();
+// //     const data = questions[index];
+// //     quesBox.innerText = `${index + 1}. ${data.que}`;
+// //     optionInputs[0].value = data.a;
+// //     optionInputs[0].nextElementSibling.innerText = `a) ${data.a}`;
+// //     optionInputs[1].value = data.b;
+// //     optionInputs[1].nextElementSibling.innerText = `b) ${data.b}`;
+// //     optionInputs[2].value = data.c;
+// //     optionInputs[2].nextElementSibling.innerText = `c) ${data.c}`;
+// //     optionInputs[3].value = data.d;
+// //     optionInputs[3].nextElementSibling.innerText = `d) ${data.d}`;
+// // };
+
+// // const submitQuiz = () => {
+// //     const data = questions[index];
+// //     const ans = getAnswer();
+// //     if (ans === data.correct) {
+// //         right++;
+// //     } else {
+// //         wrong++;
+// //     }
+// //     index++;
+// //     loadQuestion();
+// // };
+
+// // const getAnswer = () => {
+// //     let answer;
+// //     optionInputs.forEach((input) => {
+// //         if (input.checked) {
+// //             answer = input.value;
+// //         }
+// //     });
+// //     return answer;
+// // };
+
+// // const reset = () => {
+// //     optionInputs.forEach((input) => {
+// //         input.checked = false;
+// //     });
+// // };
+
+// // const endQuiz = () => {
+// //     document.getElementById("box").innerHTML = `
+// //         <div style="text-align:center">
+// //             <h3>Thank you for playing the quiz!</h3>
+// //             <h2>${right} / ${total} are correct</h2>
+// //         </div>`;
+// // };
+
+// // loadQuestion();
+
+
+
+
+
+
+
+
+const questions = [
+    {
+        'que': 'Which of the following is a markup language?',
+        'a': 'HTML',
+        'b': 'CSS',
+        'c': 'JavaScript',
+        'd': 'PHP',
+        'correct': 'a'
+    },
+    {
+        'que': "What year was JavaScript launched?",
+        'a': '1996',
+        'b': '1995',
+        'c': '1994',
+        'd': 'none of the above',
+        'correct': 'b'
+    },
+    {
+        'que': "What does CSS stand for?",
+        'a': 'Hypertext Markup Language',
+        'b': 'Cascading style Sheet',
+        'c': 'Jason Object Notation',
+        'd': 'Helicopter Terminals Motorboats Lamborghinis',
+        'correct': 'b'
+    }
+];
+
+let index = 0;
+let total = questions.length;
+let right = 0;
+let wrong = 0;
+const quesBox = document.getElementById("quesBox");
+const optionInputs = document.querySelectorAll(".options");
+
+const loadQuestion = () => {
+    if (index === total) {
+        return endQuiz();
+    }
+
+    reset();
+    const data = questions[index];
+    quesBox.innerText = `${index + 1}. ${data.que}`;
+    optionInputs[0].value = data.a;
+    optionInputs[0].nextElementSibling.innerText = `a) ${data.a}`;
+    optionInputs[1].value = data.b;
+    optionInputs[1].nextElementSibling.innerText = `b) ${data.b}`;
+    optionInputs[2].value = data.c;
+    optionInputs[2].nextElementSibling.innerText = `c) ${data.c}`;
+    optionInputs[3].value = data.d;
+    optionInputs[3].nextElementSibling.innerText = `d) ${data.d}`;
+};
+
+const submitQuiz = () => {
+    const data = questions[index];
+    const ans = getAnswer();
+    if (ans === data.correct) {
+        right++;
+    } else {
+        wrong++;
+    }
+    index++;
+    loadQuestion();
+};
+
+const getAnswer = () => {
+    let answer;
+    optionInputs.forEach((input) => {
+        if (input.checked) {
+            answer = input.value;
+        }
+    });
+    return answer;
+};
+
+const reset = () => {
+    optionInputs.forEach((input) => {
+        input.checked = false;
+    });
+};
+
+const endQuiz = () => {
+    document.getElementById("box").innerHTML = `
+        <div style="text-align:center">
+            <h3>Thank you for playing the quiz!</h3>
+            <h2>${right} / ${total} are correct</h2>
+        </div>`;
+};
+
+loadQuestion();
+
+const questions = [
+    {
+        que: 'what is my name?',
+        options: [
+            'amir', 
+            'muhammad', 
+            'muhammadamir', 
+            'lalkhan'
+        ],
+        correctAnswer: ['muhammad' ,'amir']
+    },
+    {
+        que: 'what is my age ?',
+        options: [
+            '18', 
+            '22', 
+            '23', 
+            'None of the above'
+        ],
+        correctAnswer: ['23','22']
+    },
+    {
+        que: 'what is my favourite color?',
+        options: [
+            'red',
+            'green',
+            'yalloa',
+            'white'
+        ],
+        correctAnswer:[ 'red', 'green']
+    },
+    {
+        que: 'what is my favourite color box?',
+        options: [
+            'red',
+            'green',
+            'yalloa',
+            'white'
+        ],
+        correctAnswer: ['red','green']
+    },
+    {
+        que: 'what is my favourite color ?',
+        options: [
+            'red',
+            'green',
+            'yalloa',
+            'white'
+        ],
+        correctAnswer: ['red', 'green']
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+const quesBox = document.getElementById('quesBox');
+const optionInputs = document.querySelectorAll('.options');
+const submitButton = document.querySelector('.btn');
+
+function loadQuestion() {
+    reset();
+    if (currentQuestion < questions.length) {
+        const currentQuiz = questions[currentQuestion];
+        quesBox.textContent = `${currentQuestion + 1}) ${currentQuiz.que}`;
+        for (let i = 0; i < 4; i++) {
+            optionInputs[i].value = currentQuiz.options[i];
+            optionInputs[i].nextElementSibling.textContent = `${String.fromCharCode(97 + i)}) ${currentQuiz.options[i]}`;
+        }
+    } else {
+        endQuiz();
+    }
+}
+
+function checkAnswer() {
+    for (let i = 0; i < optionInputs.length; i++) {
+        if (optionInputs[i].checked) {
+            const selectedOption = optionInputs[i].value;
+            const currentQuiz = questions[currentQuestion];
+            if (selectedOption === currentQuiz.correctAnswer) {
+                score++;
+            }
+            currentQuestion++;
+            loadQuestion();
+            break;
+        }
+    }
+}
+const reset = () => {
+    optionInputs.forEach((input) => {
+        input.checked = false;
+    });
+};
+
+function endQuiz() {
+    document.getElementById('box').innerHTML = `
+        <div style="text-align: center;">
+            <h3>Thank you for playing the quiz!</h3>
+            <h2>Your Ans: ${score} out of ${questions.length}</h2>
+        </div>`;
+}
+
+submitButton.addEventListener('click', checkAnswer);
+
+loadQuestion();
+
+const questions = [
+    {
+        que: 'what is my name?',
+        options: [
+            'amir', 
+            'muhammad', 
+            'muhammadamir', 
+            'lalkhan'
+        ],
+        correctAnswer: ['muhammad' ,'amir']
+    },
+    {
+        que: 'what is my age ?',
+        options: [
+            '18', 
+            '22', 
+            '23', 
+            'None of the above'
+        ],
+        correctAnswer: ['23','22']
+    },
+    {
+        que: 'what is my favourite color?',
+        options: [
+            'red',
+            'green',
+            'yalloa',
+            'white'
+        ],
+        correctAnswer:[ 'red', 'green']
+    },
+    {
+        que: 'what is my favourite color box?',
+        options: [
+            'red',
+            'green',
+            'yalloa',
+            'white'
+        ],
+        correctAnswer: ['red','green']
+    },
+    {
+        que: 'what is my favourite color ?',
+        options: [
+            'red',
+            'green',
+            'yalloa',
+            'white'
+        ],
+        correctAnswer: ['red', 'green']
+    }
+];
+
+let currentQuestion = [0,1];
+let score = 0;
+
+const quesBox = document.getElementById('quesBox');
+const optionInputs = document.querySelectorAll('.options');
+const submitButton = document.querySelector('.btn');
+
+function loadQuestion() {
+    reset();
+    if (currentQuestion < questions.length) {
+        const currentQuiz = questions[currentQuestion];
+        quesBox.textContent = `${currentQuestion + 1}) ${currentQuiz.que}`;
+        for (let i = 0; i < 4; i++) {
+            optionInputs[i].value = currentQuiz.options[i];
+            optionInputs[i].nextElementSibling.textContent = `${String.fromCharCode(97 + i)}) ${currentQuiz.options[i]}`;
+        }
+    } else {
+        endQuiz();
+    }
+}
+
+function checkAnswer() {
+    for (let i = 0; i < optionInputs.length; i++) {
+        if (optionInputs[i].checked) {
+            const selectedOption = optionInputs[i].value;
+            const currentQuiz = questions[currentQuestion];
+            if (selectedOption === currentQuiz.correctAnswer) {
+                score++;
+            }
+            currentQuestion++;
+            loadQuestion();
+            break;
+        }
+    }
+}
+const reset = () => {
+    optionInputs.forEach((input) => {
+        input.checked = false;
+    });
+};
+
+function endQuiz() {
+    document.getElementById('box').innerHTML = `
+        <div style="text-align: center;">
+            <h3>Thank you for playing the quiz!</h3>
+            <h2>Your Ans: ${score} out of ${questions.length}</h2>
+        </div>`;
+}
+
+submitButton.addEventListener('click', checkAnswer);
+
+loadQuestion();
+
+const questions = [
+    {
+        que: 'what is my name?',
+        options: [
+            'amir', 
+            'muhammad', 
+            'muhammadamir', 
+            'lalkhan'
+        ],
+        correctAnswer: ['muhammad', 'amir']
+    },
+    {
+        que: 'what is my age?',
+        options: [
+            '18', 
+            '22', 
+            '23', 
+            'None of the above'
+        ],
+        correctAnswer: ['23', '22']
+    },
+    {
+        que: 'what is my favourite color?',
+        options: [
+            'red',
+            'green',
+            'yalloa',
+            'white'
+        ],
+        correctAnswer: ['red', 'green']
+    },
+    {
+        que: 'what is my favourite color box?',
+        options: [
+            'red',
+            'green',
+            'yalloa',
+            'white'
+        ],
+        correctAnswer: ['red', 'green']
+    },
+    {
+        que: 'what is my favourite color?',
+        options: [
+            'red',
+            'green',
+            'yalloa',
+            'white'
+        ],
+        correctAnswer: ['red', 'green']
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+const quesBox = document.getElementById('quesBox');
+const optionInputs = document.querySelectorAll('.options');
+const submitButton = document.querySelector('.btn');
+
+function loadQuestion() {
+    if (currentQuestion < questions.length) {
+        const currentQuiz = questions[currentQuestion];
+        quesBox.textContent = `${currentQuestion + 1}) ${currentQuiz.que}`;
+        for (let i = 0; i < 4; i++) {
+            optionInputs[i].value = currentQuiz.options[i];
+            optionInputs[i].nextElementSibling.textContent = `${String.fromCharCode(97 + i)}) ${currentQuiz.options[i]}`;
+        }
+    } else {
+        endQuiz();
+    }
+}
+
+function checkAnswer() {
+    const selectedOptions = []; // ya new bana ya h
+    for (let i = 0; i < optionInputs.length; i++) {
+        if (optionInputs[i].checked) {
+            selectedOptions.push(optionInputs[i].value); // ya push kia h 
+        }
+    }
+    
+    const currentQuiz = questions[currentQuestion]; //currentQuestion o
+    const correctAnswers = currentQuiz.correctAnswer;
+    
+    if (selectedOptions.length === correctAnswers.length &&
+        selectedOptions.every((option) => correctAnswers.includes(option))) {
+        score++;
+    }
+    
+    currentQuestion++;
+    reset();
+    loadQuestion();
+}
+
+function reset() {
+    optionInputs.forEach((input) => {
+        input.checked = false; //phly yaha select tha
+    });
+}
+
+function endQuiz() {
+    document.getElementById('box').innerHTML = `
+        <div style="text-align: center;">
+            <h3>Thank you for playing the quiz!</h3>
+            <h2>Your Score: ${score} out of ${questions.length}</h2>
+        </div>`;
+    submitButton.disabled = true; // Disable kia  submit button ko  after end  quiz
+}
+
+submitButton.addEventListener('click', checkAnswer);
+
+loadQuestion();
+const questions = [
+    {
+        que: 'what is my name?',
+        options: [
+            'amir', 
+            'muhammad', 
+            'muhammadamir', 
+            'lalkhan'
+        ],
+        correctAnswer: ['muhammad', 'amir']
+    },
+    {
+        que: 'what is my age?',
+        options: [
+            '18', 
+            '22', 
+            '23', 
+            'None of the above'
+        ],
+        correctAnswer: ['23', '22']
+    },
+    {
+        que: 'what is my favourite color?',
+        options: [
+            'red',
+            'green',
+            'yalloa',
+            'white'
+        ],
+        correctAnswer: ['red', 'green']
+    },
+    {
+        que: 'what is my favourite color box?',
+        options: [
+            'red',
+            'green',
+            'yalloa',
+            'white'
+        ],
+        correctAnswer: ['red', 'green']
+    },
+    {
+        que: 'what is my favourite color?',
+        options: [
+            'red',
+            'green',
+            'yalloa',
+            'white'
+        ],
+        correctAnswer: ['red', 'green']
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+const quesBox = document.getElementById('quesBox');
+const optionInputs = document.querySelectorAll('.options');
+const submitButton = document.querySelector('.btn');
+
+function loadQuestion() {
+    if (currentQuestion < questions.length) {
+        const currentQuiz = questions[currentQuestion];
+        quesBox.textContent = `${currentQuestion + 1}) ${currentQuiz.que}`;
+        for (let i = 0; i < 4; i++) {
+            optionInputs[i].value = currentQuiz.options[i];
+            optionInputs[i].nextElementSibling.textContent = `${String.fromCharCode(97 + i)}) ${currentQuiz.options[i]}`;
+        }
+    } else {
+        endQuiz();
+    }
+}
+
+function checkAnswer() {
+    const selectedOptions = []; // ya new bana ya h
+    for (let i = 0; i < optionInputs.length; i++) {
+        if (optionInputs[i].checked) {
+            selectedOptions.push(optionInputs[i].value); // ya push kia h 
+        }
+    }
+    
+    const currentQuiz = questions[currentQuestion]; //currentQuestion o
+    const correctAnswers = currentQuiz.correctAnswer;
+    
+    if (selectedOptions.length === correctAnswers.length &&
+        selectedOptions.every((option) => correctAnswers.includes(option))) {
+        score++;
+    }
+    
+    currentQuestion++;
+    reset();
+    loadQuestion();
+}
+
+function reset() {
+    optionInputs.forEach((input) => {
+        input.checked = false; //phly yaha select tha
+    });
+}
+
+function endQuiz() {
+    document.getElementById('box').innerHTML = `
+        <div style="text-align: center;">
+            <h3>Thank you for playing the quiz!</h3>
+            <h2>Your Score: ${score} out of ${questions.length}</h2>
+        </div>`;
+    submitButton.disabled = true; // Disable kia  submit button ko  after end  quiz
+}
+
+submitButton.addEventListener('click', checkAnswer);
+
+loadQuestion();
+const questions = [
+    {
+        que: 'what is my name?',
+        options: [
+            'amir', 
+            'muhammad', 
+            'muhammadamir', 
+            'lalkhan'
+        ],
+        correctAnswer: ['muhammad', 'amir']
+    },
+    {
+        que: 'what is my age?',
+        options: [
+            '18', 
+            '22', 
+            '23', 
+            'None of the above'
+        ],
+        correctAnswer: ['23', '22']
+    },
+    {
+        que: 'what is my favourite color?',
+        options: [
+            'red',
+            'green',
+            'yalloa',
+            'white'
+        ],
+        correctAnswer: ['red', 'green']
+    },
+    {
+        que: 'what is my favourite color box?',
+        options: [
+            'red',
+            'green',
+            'yalloa',
+            'white'
+        ],
+        correctAnswer: ['red', 'green']
+    },
+    {
+        que: 'what is my favourite color?',
+        options: [
+            'red',
+            'green',
+            'yalloa',
+            'white'
+        ],
+        correctAnswer: ['red', 'green']
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+const quesBox = document.getElementById('quesBox');
+const optionInputs = document.querySelectorAll('.options');
+const submitButton = document.querySelector('.btn');
+
+function loadQuestion() {
+    if (currentQuestion < questions.length) {
+        const currentQuiz = questions[currentQuestion];
+        quesBox.textContent = `${currentQuestion + 1}) ${currentQuiz.que}`;
+        for (let i = 0; i < 4; i++) {
+            optionInputs[i].value = currentQuiz.options[i];
+            optionInputs[i].nextElementSibling.textContent = `${String.fromCharCode(97 + i)}) ${currentQuiz.options[i]}`;
+        }
+    } else {
+        endQuiz();
+    }
+}
+
+function checkAnswer() {
+    const selectedOptions = []; // ya new bana ya h
+    for (let i = 0; i < optionInputs.length; i++) {
+        if (optionInputs[i].checked) {
+            selectedOptions.push(optionInputs[i].value); // ya push kia h 
+        }
+    }
+    
+    const currentQuiz = questions[currentQuestion]; //currentQuestion o
+    const correctAnswers = currentQuiz.correctAnswer;
+    
+    if (selectedOptions.length === correctAnswers.length &&
+        selectedOptions.every((option) => correctAnswers.includes(option))) {
+        score++;
+    }
+    
+    currentQuestion++;
+    reset();
+    loadQuestion();
+}
+
+function reset() {
+    optionInputs.forEach((input) => {
+        input.checked = false; //phly yaha select tha
+    });
+}
+
+function endQuiz() {
+    document.getElementById('box').innerHTML = `
+        <div style="text-align: center;">
+            <h3>Thank you for playing the quiz!</h3>
+            <h2>Your Score: ${score} out of ${questions.length}</h2>
+        </div>`;
+    submitButton.disabled = true; // Disable kia  submit button ko  after end  quiz
+}
+
+submitButton.addEventListener('click', checkAnswer);
+
+loadQuestion();
+
+
+
+let currentQuestion = 0;
+let score = 0;
+
+const quesBox = document.getElementById('quesBox');
+const optionInputs = document.querySelectorAll('.options');
+const submitButton = document.querySelector('.btn');
+
+function loadQuestion() {
+    if (currentQuestion < questions.length) {
+        const currentQuiz = questions[currentQuestion];
+        quesBox.textContent = `${currentQuestion + 1}) ${currentQuiz.que}`;
+        for (let i = 0; i < 4; i++) {
+            optionInputs[i].value = currentQuiz.options[i];
+            optionInputs[i].nextElementSibling.textContent = `${String.fromCharCode(97 + i)}) ${currentQuiz.options[i]}`;
+        }
+    } else {
+        endQuiz();
+    }
+}
+
+function checkAnswer() {
+    const selectedOptions = []; // ya new bana ya h
+    for (let i = 0; i < optionInputs.length; i++) {
+        if (optionInputs[i].checked) {
+            selectedOptions.push(optionInputs[i].value); // ya push kia h 
+        }
+    }
+    
+    const currentQuiz = questions[currentQuestion]; //currentQuestion o
+    const correctAnswers = currentQuiz.correctAnswer;
+    
+    if (selectedOptions.length === correctAnswers.length &&
+        selectedOptions.every((option) => correctAnswers.includes(option))) {
+        score++;
+    }
+    
+    currentQuestion++;
+    reset();
+    loadQuestion();
+}
+
+function reset() {
+    optionInputs.forEach((input) => {
+        input.checked = false; //phly yaha select tha
+    });
+}
+
+function endQuiz() {
+    document.getElementById('box').innerHTML = `
+        <div style="text-align: center;">
+            <h3>Thank you for playing the quiz!</h3>
+            <h2>Your Score: ${score} out of ${questions.length}</h2>
+        </div>`;
+    submitButton.disabled = true; // Disable kia  submit button ko  after end  quiz
+}
+
+submitButton.addEventListener('click', checkAnswer);
+
+loadQuestion();
+
+
+
+
+
+
+
+
+
+if (
+        selectedOptions.length === correctAnswers.length &&
+        selectedOptions.every((option) => correctAnswers.includes(option))
+    )
+
+
+
+    // function checkAnswer() {
+        //     const selectedOptions = [];
+        //     for (let i = 0; i < optionInputs.length; i++) {
+        //         if (optionInputs[i].checked) {
+        //             selectedOptions.push(optionInputs[i].value);
+        //         }
+        //     }
+        //     const currentQuiz = questions[currentQuestion];
+        //     const correctAnswers = currentQuiz.correctAnswer;
+        
+        //     if (
+        //         selectedOptions.length === correctAnswers.length &&
+        //         selectedOptions.every((option) => correctAnswers.includes(option))
+        //     )
+        //     {
+        //         score++;
+        //     }
+        
+        //     currentQuestion++;
+        //     loadQuestion();
+            
+        // }
+        
+        // function checkAnswer() {
+        //     const selectedOptions = Array.from(optionInputs).filter((input) => input.checked).map((input) => input.value);
+            
+        //     const currentQuiz = questions[currentQuestion];
+        //     const correctAnswers = currentQuiz.correctAnswer;
+        
+        //     let isCorrect = true;
+        
+        //     for (let i = 0; i < selectedOptions.length; i++) {
+        //         if (!correctAnswers.includes(selectedOptions[i])) {
+        //             isCorrect = false;
+        //             break;
+        //         }
+        //     }
+        
+        //     if (isCorrect && selectedOptions.length === correctAnswers.length) {
+        //         score++;
+        //     }
+        
+        //     currentQuestion++;
+        //     if (currentQuestion < questions.length) {
+        //         loadQuestion();
+        //     } else {
+        //         endQuiz();
+        //     }
+        // }
